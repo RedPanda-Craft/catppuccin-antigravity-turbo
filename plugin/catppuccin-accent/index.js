@@ -198,13 +198,27 @@
     // 6. Direct Studio & Gemini Host Runtime Tokens
     root.style.setProperty("--studio-surface", colors.base);
     root.style.setProperty("--gemini-surface", colors.surface0);
-    root.style.setProperty("--gemini-switch-track", isDark ? "#171717" : colors.mantle);
+    root.style.setProperty("--gemini-surface-hover", colors.surface1);
+    root.style.setProperty("--gemini-trigger-hover", colors.surface1);
+    root.style.setProperty("--gemini-control-hover", colors.surface1);
+    root.style.setProperty("--gemini-separator", colors.surface0);
+    root.style.setProperty("--gemini-switch-track", colors.crust);
     root.style.setProperty("--gemini-switch-slider", colors.surface0);
     root.style.setProperty("--gemini-body-text", colors.text);
     root.style.setProperty("--gemini-text", colors.text);
+    root.style.setProperty("--gemini-text-trigger", colors.subtext0);
+    root.style.setProperty("--gemini-text-trigger-hover", colors.text);
+    root.style.setProperty("--gemini-text-dim", colors.subtext0);
     root.style.setProperty("--gemini-page-bg", colors.base);
     root.style.setProperty("--gemini-bubble-bg", colors.surface0);
     root.style.setProperty("--gemini-composer-bg", colors.surface0);
+    root.style.setProperty("--gemini-composer-placeholder", colors.overlay0);
+    root.style.setProperty("--gemini-inline-code-bg", colors.surface0);
+    root.style.setProperty("--gemini-inline-code-text", colors[accentKey] || colors.peach);
+    root.style.setProperty("--gemini-link", colors.blue);
+    root.style.setProperty("--gemini-send-bg", accentHex);
+    root.style.setProperty("--gemini-send-bg-hover", accentHex);
+    root.style.setProperty("--gemini-home-glow-accent", glowColor);
 
     // 7. Native Window Controls Overlay (Electron Windows TitleBar)
     try {
@@ -245,8 +259,12 @@
       "--bettergravity-surface", "--bettergravity-border", "--bettergravity-text",
       "--bettergravity-row-hover", "--primary", "--primary-foreground",
       "--background", "--foreground", "--secondary", "--muted", "--border", "--card", "--sidebar",
-      "--studio-surface", "--gemini-surface", "--gemini-switch-track", "--gemini-switch-slider",
-      "--gemini-body-text", "--gemini-text", "--gemini-page-bg", "--gemini-bubble-bg", "--gemini-composer-bg"
+      "--studio-surface", "--gemini-surface", "--gemini-surface-hover", "--gemini-trigger-hover",
+      "--gemini-control-hover", "--gemini-separator", "--gemini-switch-track", "--gemini-switch-slider",
+      "--gemini-body-text", "--gemini-text", "--gemini-text-trigger", "--gemini-text-trigger-hover",
+      "--gemini-text-dim", "--gemini-page-bg", "--gemini-bubble-bg", "--gemini-composer-bg",
+      "--gemini-composer-placeholder", "--gemini-inline-code-bg", "--gemini-inline-code-text",
+      "--gemini-link", "--gemini-send-bg", "--gemini-send-bg-hover", "--gemini-home-glow-accent"
     ];
     props.forEach(p => root.style.removeProperty(p));
     ACCENT_KEYS.forEach(acc => root.style.removeProperty(`--ctp-${acc.id}`));
@@ -449,6 +467,8 @@
   }
 
   const CATPPUCCIN_ONBOARDING_KEY = "bettergravity:catppuccin:onboarding_v1";
+  let activeOnboardingTimer = null;
+  let activeOnboardingCallout = null;
 
   function triggerCatppuccinOnboarding() {
     try {
@@ -457,13 +477,13 @@
       return;
     }
 
-    setTimeout(() => {
+    activeOnboardingTimer = setTimeout(() => {
       const btn = document.querySelector('[data-bettergravity-button="Accent"]');
       if (!btn) return;
 
       // Avoid collision with other active callouts
       if (document.querySelector(".bg-onboarding-callout")) {
-        setTimeout(triggerCatppuccinOnboarding, 3500);
+        activeOnboardingTimer = setTimeout(triggerCatppuccinOnboarding, 3500);
         return;
       }
 
@@ -472,6 +492,7 @@
           localStorage.setItem(CATPPUCCIN_ONBOARDING_KEY, "true");
         } catch (_) {}
         callout.classList.remove("is-visible");
+        activeOnboardingCallout = null;
         setTimeout(() => callout.remove(), 250);
       };
 
@@ -495,6 +516,7 @@
       `;
 
       document.body.appendChild(callout);
+      activeOnboardingCallout = callout;
 
       const rect = btn.getBoundingClientRect();
       const width = 240;
@@ -515,7 +537,7 @@
         callout.classList.add("is-visible");
       });
 
-      setTimeout(() => {
+      activeOnboardingTimer = setTimeout(() => {
         if (document.body.contains(callout)) {
           dismiss();
         }
@@ -564,11 +586,21 @@
     }
   }
 
+  function isUserTyping() {
+    const el = document.activeElement;
+    if (!el) return false;
+    const tag = el.tagName?.toLowerCase();
+    if (tag === "input" || tag === "textarea") return true;
+    if (el.isContentEditable || el.closest?.('[contenteditable="true"]')) return true;
+    return false;
+  }
+
   // Initial synchronization
   syncLifecycle();
 
   // Observer for dynamic theme switching
   observer = new MutationObserver(() => {
+    if (isUserTyping()) return;
     syncLifecycle();
   });
   observer.observe(document.head, { childList: true, subtree: true, attributes: true });
@@ -593,8 +625,9 @@
     if (!card) card = getComposerCard();
     if (!card) return;
     card.classList.remove("bg-composer-breathe-1x", "bg-composer-settled");
-    void card.offsetWidth; // Force reflow to cleanly restart the single breath
-    card.classList.add("bg-composer-breathe-1x");
+    requestAnimationFrame(() => {
+      card.classList.add("bg-composer-breathe-1x");
+    });
   }
 
   function handleComposerFocus() {
@@ -665,6 +698,9 @@
     document.removeEventListener("focusin", handleGlobalFocusIn, true);
     document.removeEventListener("focusout", handleGlobalFocusOut, true);
     if (composerBlurTimer) clearTimeout(composerBlurTimer);
+    if (activeOnboardingTimer) clearTimeout(activeOnboardingTimer);
+    if (activeOnboardingCallout) activeOnboardingCallout.remove();
+    document.querySelectorAll(".bg-onboarding-callout").forEach((el) => el.remove());
     const card = getComposerCard();
     if (card) {
       card.classList.remove("bg-composer-breathe-1x", "bg-composer-settled");
