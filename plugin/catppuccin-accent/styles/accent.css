@@ -1,0 +1,386 @@
+/* ==========================================================================
+   Catppuccin Dynamic Accent & Flavor Switcher Styles (Two-Tier Architecture)
+   ========================================================================== */
+
+/* 1. TitleBar Trigger Button */
+[data-bettergravity-button="Accent"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--catppuccin-accent, #fab387) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  -webkit-app-region: no-drag !important;
+  transition: background-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 140ms ease !important;
+  margin-right: 4px;
+}
+
+[data-bettergravity-button="Accent"]:hover {
+  background-color: var(--bettergravity-row-hover, rgba(205, 214, 244, 0.08)) !important;
+  transform: scale(1.05);
+}
+
+[data-bettergravity-button="Accent"]:active {
+  transform: scale(0.95);
+}
+
+[data-bettergravity-button="Accent"] svg {
+  width: 18px !important;
+  height: 18px !important;
+  fill: currentColor !important;
+}
+
+/* 2. Palette Popup Container */
+.ctp-accent-popup {
+  position: fixed;
+  z-index: 99999;
+  width: 284px;
+  background: var(--ctp-mantle, #181825);
+  border: 1px solid var(--ctp-surface1, #45475a);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+  padding: 12px 14px 14px;
+  font-family: var(--gemini-font, system-ui, -apple-system, sans-serif);
+  color: var(--ctp-text, #cdd6f4);
+  user-select: none;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+  transform-origin: top right;
+  transition: opacity 140ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  -webkit-app-region: no-drag;
+}
+
+.ctp-accent-popup.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Header */
+.ctp-accent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ctp-surface0, #313244);
+}
+
+.ctp-accent-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ctp-subtext0, #a6adc8);
+  text-transform: uppercase;
+}
+
+.ctp-accent-current-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(205, 214, 244, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--catppuccin-accent, #fab387);
+}
+
+/* Section Common */
+.ctp-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--ctp-overlay1, #7f849c);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* 3. Upper Tier: 4 Flavor Segment Tabs */
+.ctp-flavor-section {
+  margin-bottom: 12px;
+}
+
+.ctp-flavor-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  background: var(--ctp-crust, #11111b);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--ctp-surface0, #313244);
+}
+
+.ctp-flavor-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 2px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--ctp-subtext0, #a6adc8);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 130ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.ctp-flavor-tab:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ctp-text, #cdd6f4);
+}
+
+.ctp-flavor-tab.is-active {
+  background: var(--ctp-surface1, #45475a);
+  color: var(--ctp-text, #cdd6f4);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.ctp-flavor-preview-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* 4. Lower Tier: 14 Accent Colors Grid */
+.ctp-accent-section {
+  margin-top: 4px;
+}
+
+.ctp-accent-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  justify-items: center;
+  padding: 2px 0;
+}
+
+.ctp-accent-dot {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 140ms ease;
+  box-sizing: border-box;
+}
+
+.ctp-accent-dot:hover {
+  transform: scale(1.22);
+  z-index: 2;
+  box-shadow: 0 0 10px var(--dot-glow, rgba(255, 255, 255, 0.3));
+}
+
+.ctp-accent-dot.is-active {
+  border-color: #ffffff !important;
+  transform: scale(1.16);
+  box-shadow: 0 0 12px var(--dot-glow, rgba(255, 255, 255, 0.45)), inset 0 0 0 2px var(--ctp-mantle, #181825);
+}
+
+/* Tooltip on Dot Hover */
+.ctp-accent-dot::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  padding: 2px 6px;
+  background: var(--ctp-crust, #11111b);
+  border: 1px solid var(--ctp-surface1, #45475a);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ctp-text, #cdd6f4);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms ease, transform 100ms ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.ctp-accent-dot:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+ * 5. Chat Composer Focus Inset Breathing Glow (Zero INP Lag Architecture)
+ * ========================================================================== */
+
+/* 5.0 Strip outer container background, border, and glow to eliminate nested card borders */
+[data-testid="agent-input-box"],
+[data-testid="agent-input-box"]:focus-within {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[data-testid="agent-input-box"] > .rounded-2xl.bg-card-border,
+[data-testid="agent-input-box"] > .rounded-2xl.bg-card-border:focus-within {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+body:not(.gemini-app-loaded) [data-testid="agent-input-box"],
+body:not(.gemini-app-loaded) [data-testid="agent-input-box"]:focus-within {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 5.1 Chat composer card container: relative positioning for aura compositing */
+.bg-chat-composer,
+[data-testid="chat-input-container"],
+[data-testid="agent-input-box"] > .rounded-2xl.bg-card-border > .bg-card:not([data-mention-menu]),
+[data-testid="agent-input-box"] .bg-card:not([data-mention-menu]) {
+  position: relative !important;
+}
+
+/* 5.2 Dedicated GPU compositing glow layer: dual-tier feathered inset aura, opacity-only animation */
+.bg-chat-composer::after,
+[data-testid="chat-input-container"]::after,
+[data-testid="agent-input-box"] > .rounded-2xl.bg-card-border > .bg-card:not([data-mention-menu])::after,
+[data-testid="agent-input-box"] .bg-card:not([data-mention-menu])::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+  /* Dual-tier feathered inset aura (4px close-range skeleton + 18px soft diffuse light) */
+  box-shadow: inset 0 0 4px 1px var(--catppuccin-accent, var(--bettergravity-accent, #3b82f6)),
+              inset 0 0 18px 3px var(--catppuccin-accent-glow, var(--bettergravity-accent-soft, rgba(59, 130, 246, 0.45))) !important;
+  opacity: 0;
+  transform: translateZ(0);
+  will-change: opacity;
+  /* Blur transition: fast GPU opacity fade */
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 5.3 Focus triggers single 1.6s breathing aura settling into 30% ambient glow */
+.bg-composer-breathe-1x::after,
+[data-testid="agent-input-box"] .bg-card.bg-composer-breathe-1x::after {
+  animation: bg-composer-breathe 1.6s cubic-bezier(0.2, 0.8, 0.25, 1) forwards !important;
+}
+
+@keyframes bg-composer-breathe {
+  0% {
+    opacity: 0;
+  }
+  28% {
+    /* Peak charge (~0.45s to synchronize with eye fixation) */
+    opacity: 1;
+  }
+  100% {
+    /* Smooth release settling to 30% ambient glow */
+    opacity: 0.30;
+  }
+}
+
+/* 5.4 Physical isolation: prevent caret blinking from triggering relayout/repaint */
+[data-testid="agent-input-box"] [role="combobox"][contenteditable] {
+  contain: layout style;
+}
+
+/* -------------------------------------------------------------------------- */
+/* First-Run Onboarding Callout Bubble (Native Antigravity Header Styling)     */
+/* -------------------------------------------------------------------------- */
+.bg-onboarding-callout {
+  position: fixed;
+  z-index: 10000;
+  width: 240px;
+  background: var(--ctp-mantle, #181825);
+  border: 1px solid var(--ctp-surface1, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  pointer-events: auto;
+  -webkit-app-region: no-drag !important;
+}
+
+.bg-onboarding-callout.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bg-callout-caret {
+  position: absolute;
+  top: -6px;
+  width: 12px;
+  height: 6px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: var(--ctp-mantle, #181825);
+}
+
+.bg-callout-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  -webkit-app-region: no-drag !important;
+}
+
+.bg-callout-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.bg-callout-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--catppuccin-accent, #b4befe);
+}
+
+.bg-callout-body {
+  font-size: 12px;
+  color: var(--ctp-subtext0, #a6adc8);
+  line-height: 1.45;
+  margin-bottom: 10px;
+  -webkit-app-region: no-drag !important;
+}
+
+.bg-callout-footer {
+  display: flex;
+  justify-content: flex-end;
+  -webkit-app-region: no-drag !important;
+}
+
+.bg-callout-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--ctp-text, #cdd6f4);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  -webkit-app-region: no-drag !important;
+}
+
+.bg-callout-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}

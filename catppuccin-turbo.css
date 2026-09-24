@@ -1,23 +1,20 @@
 /**
  * @name        Catppuccin Turbo
- * @description Ultra-fast, zero-latency Catppuccin Mocha theme. Removes blur/shadow GPU lag, neutralizes sluggish entrance keyframes, and applies sleek, high-contrast dark tones.
- * @author      Antigravity
- * @version     1.0.1
+ * @description Ultra-fast, host-aligned Catppuccin theme for Antigravity 2.0 / BetterGravity 3.0 with Mocha & Latte support.
+ * @author      RedPanda-Craft
+ * @version     2.0.1
  * @source      https://github.com/catppuccin/catppuccin
  */
 
 /* ==========================================================================
-   0. User Accent & Palette Presets (Obsidian-Style Configuration)
-   --------------------------------------------------------------------------
-   Change `--catppuccin-accent` to any of the presets below. BetterGravity
-   will hot-reload the UI instantly upon saving!
+   0. User Accent & Palette Presets (Obsidian-Style Hot-Reload Configuration)
    ========================================================================== */
 :root {
   /* Catppuccin 14 Official Accent Colors */
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo:  #f2cdcd;
   --ctp-pink:      #f5c2e7;
-  --ctp-mauve:     #cba6f7; /* Default Catppuccin Violet/Mauve */
+  --ctp-mauve:     #cba6f7;
   --ctp-red:       #f38ba8;
   --ctp-maroon:    #eba0ac;
   --ctp-peach:     #fab387;
@@ -29,142 +26,223 @@
   --ctp-blue:      #89b4fa;
   --ctp-lavender:  #b4befe;
 
-  /* >>> [主强调色开关]：直接修改下行即可切换全局强调色（按钮、高亮、焦点边框） <<< */
-  --catppuccin-accent: var(--ctp-mauve);
+  /* Catppuccin Mocha Base Palette Scales */
+  --ctp-crust:     #11111b;
+  --ctp-mantle:    #181825;
+  --ctp-base:      #1e1e2e;
+  --ctp-surface0:  #313244;
+  --ctp-surface1:  #45475a;
+  --ctp-surface2:  #585b70;
+  --ctp-overlay0:  #6c7086;
+  --ctp-overlay1:  #7f849c;
+  --ctp-overlay2:  #9399b2;
+  --ctp-subtext0:  #a6adc8;
+  --ctp-subtext1:  #bac2de;
+  --ctp-text:      #cdd6f4;
 
-  /* >>> [按钮专属强调色]：若希望按钮使用独立颜色，可单独修改下行 <<< */
+  /* User Accent Preset Switch: Edit variable below to switch global accent color */
+  --catppuccin-accent: var(--ctp-peach);
   --catppuccin-button-accent: var(--catppuccin-accent);
+  --catppuccin-accent-glow: rgba(250, 179, 135, 0.22);
 }
 
 /* ==========================================================================
-   1. Design Tokens: Catppuccin Mocha Palette
+   1. Design Tokens: Antigravity Host & BetterGravity Shared Namespace
    ========================================================================== */
 :root {
-  /* Core Base Colors */
-  --background: #1e1e2e !important;          /* Mocha Base */
-  --foreground: #cdd6f4 !important;          /* Mocha Text */
-  
-  /* Accent & Interaction */
+  /* --- 1.1 Antigravity Host Native Tokens --- */
+  --background: var(--ctp-base) !important;
+  --foreground: var(--ctp-text) !important;
+
   --primary: var(--catppuccin-accent) !important;
-  --primary-foreground: #11111b !important;  /* Crust (high contrast on light accents) */
-  --secondary: #313244 !important;           /* Surface0 */
-  --secondary-foreground: #cdd6f4 !important;/* Text */
-  
-  /* Muted & Subdued Elements */
-  --muted: #181825 !important;               /* Mantle */
-  --muted-foreground: #a6adc8 !important;    /* Subtext0 */
-  
-  /* Borders & Dividers */
-  --border: #313244 !important;              /* Surface0 */
-  --card: #181825 !important;                /* Mantle */
-  --card-border: #313244 !important;         /* Surface0 */
-  
-  /* Navigation Sidebar */
-  --sidebar: #11111b !important;             /* Crust */
-  --sidebar-secondary: #1e1e2e !important;   /* Base */
-  --sidebar-muted: #6c7086 !important;       /* Overlay0 */
-  
-  /* Form Inputs & Controls */
-  --placeholder: #6c7086 !important;         /* Overlay0 */
+  --primary-foreground: var(--ctp-crust) !important;
+  --secondary: var(--ctp-surface0) !important;
+  --secondary-foreground: var(--ctp-text) !important;
+
+  --muted: var(--ctp-mantle) !important;
+  --muted-foreground: var(--ctp-subtext0) !important;
+
+  --border: var(--ctp-surface0) !important;
+  --card: var(--ctp-mantle) !important;
+  --card-border: var(--ctp-surface0) !important;
+
+  --sidebar: var(--ctp-crust) !important;
+  --sidebar-secondary: var(--ctp-base) !important;
+  --sidebar-muted: var(--ctp-overlay1) !important;
+
+  --placeholder: var(--ctp-overlay0) !important;
   --link: var(--ctp-blue) !important;
   --focus-ring-color: var(--catppuccin-accent) !important;
-  
-  /* Status Indicators */
+
   --error: var(--ctp-red) !important;
-  --warning: var(--ctp-peach) !important;
+  --warning: var(--ctp-yellow) !important;
   --success: var(--ctp-green) !important;
-  
-  /* Code Blocks */
+
   --code-foreground: var(--ctp-rosewater) !important;
+
+  /* --- 1.2 BetterGravity Shared Runtime Tokens --- */
+  --bettergravity-accent: var(--catppuccin-accent);
+  --bettergravity-accent-soft: var(--catppuccin-accent-glow);
+  --bettergravity-surface: var(--ctp-mantle);
+  --bettergravity-border: var(--ctp-surface0);
+  --bettergravity-text: var(--ctp-text);
+  --bettergravity-row-hover: rgba(205, 214, 244, 0.08);
 }
 
 /* ==========================================================================
-   2. Turbo Performance Engine (Eliminating Reflow, Repaint & GPU Blur Overhead)
+   2. Turbo Performance Engine (Containment, Paint & GPU Optimization)
    ========================================================================== */
 
-/* 2.1 Kill heavy GPU raster filters (backdrop blur & diffuse drop-shadows) */
-*,
-*::before,
-*::after {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+/* 2.1 Render Containment - Suppress reflow & repaint overhead across long chat cascades */
+[data-testid="user-input-step"],
+[data-testid="planner-response-text"],
+[role="article"][aria-label="Agent response"],
+[role="article"][aria-label="User message"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+
+[data-testid="conversation-row-sidebar"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 38px;
+}
+
+pre,
+div.relative:has(> pre),
+.code-block {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+}
+
+/* 2.2 Strip expensive GPU raster filters (backdrop blur & text shadows) */
+body,
+#root,
+[data-testid="conversation-view"] {
   text-shadow: none !important;
 }
 
-/* 2.2 Short-circuit long transitions on layout and container elements */
-button,
+/* 2.3 Natural Micro-Transitions (120ms~150ms smooth physics, zero sluggish delays) */
+button:not([data-no-transition]),
+[role="button"],
+a,
 input,
 textarea,
 select,
-[role="button"],
-[role="dialog"],
-[role="menu"],
-[data-testid*="conversation"],
-[data-testid*="sidebar"],
-.bg-card,
-.card {
-  transition-duration: 0.04s !important;
-  transition-delay: 0s !important;
+.bg-tree-toggle-btn,
+.bg-branch-btn,
+.bettergravity-pet__badge {
+  transition-duration: 140ms !important;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 
-/* 2.3 Instantaneous Keyframe Overrides (Antigravity 2.0 Native Animations) */
-@keyframes fade-in {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes blobEntrance {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes parentFade {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes logoEntrance {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes textEntrance {
-  from { opacity: 1; transform: none; }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes unread-ping {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-/* Ensure progress/spin animation remains functional and smooth */
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+/* 2.4 Instant Keyframe Overrides (Antigravity native entrance animations) */
+@keyframes fade-in { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+@keyframes blobEntrance { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+@keyframes parentFade { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+@keyframes logoEntrance { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+@keyframes textEntrance { from { opacity: 1; transform: none; } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ==========================================================================
-   3. Crisp Component Styling & Precision States
-   ========================================================================= */
+   3. Host Native Layout & Immersive Window Shell (TitleBar & Sidebar)
+   ========================================================================== */
 
-/* Top subtle accent line */
+/* 3.1 Immersive TitleBar Styling & Window Drag Boundaries */
 body::before {
   content: "";
   position: fixed;
   inset: 0 0 auto 0;
   height: 2px;
-  z-index: 2147483000;
-  background: linear-gradient(90deg, var(--catppuccin-accent), var(--ctp-blue) 50%, transparent 85%);
+  z-index: 9999;
+  background: linear-gradient(90deg, var(--catppuccin-accent), var(--ctp-mauve) 45%, var(--ctp-blue) 75%, transparent 95%);
   pointer-events: none;
 }
 
-/* Text Selection */
-::selection {
-  background: rgba(203, 166, 247, 0.28) !important;
-  color: #cdd6f4 !important;
+/* Immersive titlebar layout and boundary preservation */
+[data-testid="window-titlebar"],
+header:has([data-testid="sidebar-toggle"]),
+.titlebar {
+  background: var(--ctp-crust) !important;
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+  user-select: none;
 }
 
-/* High-Performance Smooth Scrollbars */
+/* Ensure titlebar buttons and plugin anchors never wrap or compress */
+[data-testid="sidebar-toggle"],
+[data-bettergravity-button],
+div:has(> button[aria-label="Go Back"]) {
+  flex-shrink: 0 !important;
+  -webkit-app-region: no-drag !important;
+}
+
+/* Truncated header text protection */
+[data-testid="window-titlebar"] span.truncate,
+header:has([data-testid="sidebar-toggle"]) .truncate {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+/* 3.2 Navigation & Sidebar Refinements */
+[role="navigation"][aria-label="Sidebar"] {
+  background-color: var(--ctp-crust) !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+}
+
+[data-testid="conversation-row-sidebar"] {
+  border-radius: 8px !important;
+  margin: 1px 6px !important;
+  transition: background-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+[data-testid="conversation-row-sidebar"]:hover {
+  background-color: var(--bettergravity-row-hover) !important;
+}
+
+[data-testid="conversation-row-sidebar"][data-selected="true"] {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+}
+
+[data-testid="conversation-row-sidebar"][data-selected="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background-color: var(--catppuccin-accent);
+}
+
+/* 3.3 Dialogs, Menus & Radix Popovers */
+[role="dialog"],
+[role="menu"],
+[data-radix-popper-content-wrapper] > div,
+.bg-popover {
+  background-color: var(--ctp-mantle) !important;
+  border: 1px solid var(--ctp-surface1) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px !important;
+}
+
+/* ==========================================================================
+   4. Typography, Markdown & Chat Aesthetics
+   ========================================================================== */
+
+/* 4.0 Color Schemes & Contrast Adaptive Overrides (Mocha / Latte) */
+body.ctp-latte-mode {
+  color-scheme: light !important;
+}
+body:not(.ctp-latte-mode) {
+  color-scheme: dark !important;
+}
+
+/* 4.1 Text Selection & Slim Smooth Scrollbars */
+::selection {
+  background: var(--catppuccin-accent-glow) !important;
+  color: var(--ctp-text) !important;
+}
+
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -174,7 +252,8 @@ body::before {
   border: 2px solid transparent;
   border-radius: 8px;
   background-clip: content-box;
-  background-color: rgba(205, 214, 244, 0.22);
+  background-color: var(--ctp-surface2, rgba(205, 214, 244, 0.2));
+  transition: background-color 150ms ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -185,79 +264,1064 @@ body::before {
   background: transparent;
 }
 
-/* Prompt Box */
-[data-testid="agent-input-box"] {
-  background-color: #181825 !important;
-  border: 1px solid #313244 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+/* 4.2 Markdown Blockquotes & Callout Highlights */
+blockquote {
+  position: relative !important;
+  border-left: 3px solid var(--catppuccin-accent) !important;
+  background: var(--catppuccin-accent-glow) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 8px 16px !important;
+  margin: 12px 0 !important;
+  color: var(--ctp-subtext1) !important;
+  font-style: italic !important;
 }
 
-[data-testid="agent-input-box"]:focus-within {
-  border-color: var(--catppuccin-accent) !important;
-}
-
-/* --------------------------------------------------------------------------
-   Send Button Precision Styling (Empty vs Active State)
-   -------------------------------------------------------------------------- */
-
-/* 1. Active State: When input has text to send */
-[data-testid="send-button"]:not(:disabled):not([disabled]):not([aria-disabled="true"]) {
-  background-color: var(--catppuccin-button-accent, var(--catppuccin-accent)) !important;
-  color: #11111b !important;
-  border: 1px solid transparent !important;
+/* 4.3 Markdown Tables & Alternate Row Gradients */
+table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 14px 0 !important;
+  border: 1px solid var(--ctp-surface0) !important;
   border-radius: 8px !important;
-  opacity: 1 !important;
+  overflow: hidden !important;
+}
+
+th {
+  background-color: var(--ctp-mantle) !important;
+  color: var(--ctp-text) !important;
+  font-weight: 600 !important;
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+}
+
+th:last-child {
+  border-right: none !important;
+}
+
+td {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+  color: var(--ctp-subtext1) !important;
+}
+
+td:last-child {
+  border-right: none !important;
+}
+
+tr:last-child td {
+  border-bottom: none !important;
+}
+
+tr:nth-child(even) td {
+  background-color: var(--ctp-mantle) !important;
+}
+
+tr:hover td {
+  background-color: var(--bettergravity-row-hover) !important;
+}
+
+/* 4.4 Inline Code Badges */
+:not(pre) > code {
+  background-color: var(--ctp-mantle) !important;
+  color: var(--catppuccin-accent) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  font-size: 0.88em !important;
+  font-family: var(--gemini-code-font, ui-monospace, SFMono-Regular, Consolas, monospace) !important;
+}
+
+/* 4.5 Code Blocks & Action Button Micro-Interactions */
+pre {
+  background-color: var(--ctp-crust) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ==========================================================================
+   5. Precision Component Controls & Micro-Interactions
+   ========================================================================== */
+
+/* 5.1 Native Input Box Container (Pure transparent layout wrapper, eliminate double-box nesting) */
+body:not(.gemini-app-loaded) [data-testid="agent-input-box"],
+[data-testid="agent-input-box"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+body:not(.gemini-app-loaded) [data-testid="agent-input-box"]:focus-within,
+[data-testid="agent-input-box"]:focus-within {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 5.2 Send Button Micro-Interactions (Active & Disabled) */
+[data-testid="send-button"]:not(:disabled):not([disabled]):not([aria-disabled="true"]) {
+  background-color: var(--catppuccin-button-accent) !important;
+  color: var(--ctp-crust) !important;
+  border-radius: 8px !important;
   cursor: pointer !important;
+  box-shadow: 0 2px 8px var(--catppuccin-accent-glow) !important;
+  transform: translateZ(0);
 }
 
 [data-testid="send-button"]:not(:disabled):not([disabled]):not([aria-disabled="true"]):hover {
-  filter: brightness(1.12) !important;
+  filter: brightness(1.1) !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px var(--catppuccin-accent-glow) !important;
 }
 
-[data-testid="send-button"]:not(:disabled):not([disabled]):not([aria-disabled="true"]) svg {
-  stroke: #11111b !important;
-  color: #11111b !important;
+[data-testid="send-button"]:not(:disabled):not([disabled]):not([aria-disabled="true"]):active {
+  transform: translateY(0) scale(0.97);
 }
 
-/* 2. Disabled State: When input is empty / nothing to send */
 [data-testid="send-button"]:disabled,
 [data-testid="send-button"][disabled],
 [data-testid="send-button"][aria-disabled="true"] {
-  background-color: #24253a !important;   /* Muted surface matching input interior */
-  color: #6c7086 !important;               /* Crisp Overlay0 gray */
-  border: 1px solid #36384f !important;   /* Distinct clean outline */
+  background-color: var(--ctp-surface0) !important;
+  color: var(--ctp-overlay0) !important;
+  border: 1px solid var(--ctp-surface1) !important;
   border-radius: 8px !important;
-  opacity: 0.75 !important;
+  opacity: 0.65 !important;
   cursor: not-allowed !important;
 }
 
-[data-testid="send-button"]:disabled svg,
-[data-testid="send-button"][disabled] svg,
-[data-testid="send-button"][aria-disabled="true"] svg {
-  stroke: #6c7086 !important;
-  color: #6c7086 !important;
-  opacity: 1 !important;
-}
-
-/* New Conversation Button */
+/* 5.3 New Conversation Button Micro-Interactions */
 [data-testid="new-conversation-button"] {
-  background: #313244 !important;
-  color: #cdd6f4 !important;
-  border: 1px solid #45475a !important;
+  background: var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+  border: 1px solid var(--ctp-surface1) !important;
   border-radius: 8px !important;
 }
 
 [data-testid="new-conversation-button"]:hover {
-  background: #45475a !important;
+  background: var(--ctp-surface1) !important;
   border-color: var(--catppuccin-accent) !important;
+  box-shadow: 0 2px 10px var(--catppuccin-accent-glow) !important;
 }
 
-/* Dialogs, Popovers & Menus - Solid backgrounds to replace blurry transparencies */
-[role="dialog"],
-[role="menu"],
-[data-radix-popper-content-wrapper] > div {
-  background-color: #181825 !important;
-  border: 1px solid #45475a !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
+/* ==========================================================================
+   6. Multi-Plugin Ecosystem Compatibility & Collaboration
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   6.1 Gemini-app Interoperability & Navigation Flex Lock
+   -------------------------------------------------------------------------- */
+/* Lock topbar navigation arrows against compression or line wraps */
+div:has(> button[aria-label="Go Back"]),
+[data-testid="sidebar-toggle"][aria-label*="Toggle Sidebar"] + div:has([aria-label="Go Back"]) {
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  z-index: 60 !important;
+  -webkit-app-region: no-drag !important;
 }
+
+/* Branch switcher pagination alignment beneath user message bubble */
+.gemini-branch-switcher,
+.bg-branch-switcher {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-top: 6px !important;
+  margin-bottom: 2px !important;
+  background: var(--ctp-mantle) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  border-radius: 9999px !important;
+  color: var(--ctp-subtext0) !important;
+  font-size: 11px !important;
+}
+
+.gemini-branch-nav-btn:hover,
+.bg-branch-switcher-nav:hover:not(:disabled) {
+  background-color: var(--catppuccin-accent-glow) !important;
+  color: var(--catppuccin-accent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6.2 Desktop Pets Companion Interoperability & Anchor Protection
+   -------------------------------------------------------------------------- */
+/* Protect topbar & sidebar paw buttons and accent palette triggers */
+[data-bettergravity-button="Pet"],
+[data-bettergravity-button="Pets"],
+[data-bettergravity-button="Accent"],
+[data-bettergravity-button="Voyager"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  color: var(--ctp-text) !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  -webkit-app-region: no-drag !important;
+}
+
+[data-bettergravity-button="Pet"] > svg,
+[data-bettergravity-button="Pets"] > svg,
+[data-bettergravity-button="Accent"] > svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0 !important;
+  fill: currentColor !important;
+}
+
+[data-bettergravity-button="Voyager"] > svg {
+  width: 21px !important;
+  height: 21px !important;
+  flex-shrink: 0 !important;
+  fill: currentColor !important;
+}
+
+[data-bettergravity-button="Pet"]:hover,
+[data-bettergravity-button="Pets"]:hover,
+[data-bettergravity-button="Accent"]:hover,
+[data-bettergravity-button="Voyager"]:hover {
+  background-color: var(--bettergravity-row-hover) !important;
+  color: var(--catppuccin-accent) !important;
+}
+
+[data-bettergravity-button="Pet"][aria-pressed="true"],
+[data-bettergravity-button="Pets"][aria-pressed="true"],
+[data-bettergravity-button="Accent"][aria-pressed="true"],
+[data-bettergravity-button="Voyager"][aria-pressed="true"] {
+  background-color: var(--ctp-surface0) !important;
+  color: var(--catppuccin-accent) !important;
+}
+
+/* Desktop pet activity cards and floating HUD tokens */
+.bettergravity-pet-card {
+  --pet-material-background: rgba(24, 24, 37, 0.9) !important;
+  --pet-material-border: var(--ctp-surface0) !important;
+  --pet-text: var(--ctp-text) !important;
+  --pet-text-secondary: var(--ctp-subtext0) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6.3 Voyager Branch Tree & Timeline HUD Interoperability
+   -------------------------------------------------------------------------- */
+/* HUD health pill indicator and vertical timeline rail */
+.bg-timeline-gauge {
+  background: rgba(24, 24, 37, 0.82) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  color: var(--ctp-text) !important;
+}
+
+.bg-timeline-rail {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.bg-timeline-rail:hover {
+  background: rgba(24, 24, 37, 0.96) !important;
+  border-color: var(--ctp-surface1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+  transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1) 0.28s,
+              padding 200ms ease 0.28s,
+              background-color 180ms ease 0.28s,
+              border-color 180ms ease 0.28s,
+              box-shadow 200ms ease 0.28s,
+              backdrop-filter 180ms ease 0.28s,
+              -webkit-backdrop-filter 180ms ease 0.28s;
+}
+
+.bg-timeline-rail.bg-expanded {
+  background: rgba(24, 24, 37, 0.96) !important;
+  border-color: var(--ctp-surface1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+  transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+              padding 200ms ease 0s,
+              background-color 180ms ease 0s,
+              border-color 180ms ease 0s,
+              box-shadow 200ms ease 0s;
+}
+
+/* Timeline node health colors mapped to Catppuccin accents */
+.bg-dot-green  { background: var(--ctp-green) !important;  box-shadow: 0 0 6px var(--ctp-green) !important; }
+.bg-dot-yellow { background: var(--ctp-yellow) !important; box-shadow: 0 0 6px var(--ctp-yellow) !important; }
+.bg-dot-orange { background: var(--ctp-peach) !important;  box-shadow: 0 0 6px var(--ctp-peach) !important; }
+.bg-dot-red    { background: var(--ctp-red) !important;    box-shadow: 0 0 8px var(--ctp-red) !important; }
+
+/* Smooth step jump pulse animation with accent glow */
+.bg-step-jump-pulse {
+  animation: bg-ctp-jump-glow 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+@keyframes bg-ctp-jump-glow {
+  0% {
+    box-shadow: 0 0 0 0 var(--catppuccin-accent-glow);
+    outline: 2px solid var(--catppuccin-accent);
+  }
+  40% {
+    box-shadow: 0 0 24px 6px var(--catppuccin-accent-glow);
+    outline: 2px solid var(--catppuccin-accent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    outline: 2px solid transparent;
+  }
+}
+
+/* Branch breadcrumb bar and dropdown styling */
+.bg-branch-header-bar {
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+  color: var(--ctp-subtext0) !important;
+}
+
+.bg-branch-dropdown {
+  background: var(--ctp-mantle) !important;
+  border: 1px solid var(--ctp-surface1) !important;
+}
+
+/* ==========================================================================
+   7. Gemini-app Theme Interoperability & Design Token Overrides
+   ========================================================================== */
+
+/* 7.1 Dynamic token bindings linking Gemini/Studio surfaces to Catppuccin Flavors */
+:root {
+  --gemini-page-bg: var(--ctp-base) !important;
+  --gemini-body-text: var(--ctp-text) !important;
+  --gemini-link: var(--catppuccin-accent) !important;
+  --gemini-surface: var(--ctp-surface0) !important;
+  --gemini-surface-hover: var(--ctp-surface1) !important;
+  --gemini-text: var(--ctp-text) !important;
+  --gemini-switch-track: var(--ctp-mantle) !important;
+  --gemini-switch-slider: var(--ctp-surface0) !important;
+  --gemini-inline-code-bg: var(--ctp-surface0) !important;
+  --gemini-inline-code-text: var(--catppuccin-accent) !important;
+  --studio-surface: var(--ctp-base) !important;
+}
+
+/* 7.2 Dark flavors (Mocha / Macchiato / Frappé) message bubbles and composer */
+body:not(.ctp-latte-mode) {
+  --gemini-bubble-bg: var(--ctp-surface0) !important;
+  --gemini-composer-bg: var(--ctp-surface0) !important;
+  --gemini-row-hover: rgba(205, 214, 244, 0.08) !important;
+  --studio-surface: var(--ctp-base) !important;
+}
+
+/* 7.3 Latte Light Mode token inversions (Eliminates harsh black-and-white zebra glare) */
+body.ctp-latte-mode {
+  --gemini-page-bg: var(--ctp-base, #eff1f5) !important;
+  --gemini-bubble-bg: var(--ctp-surface0, #ccd0da) !important; /* User prompt bubble -> Surface0 */
+  --gemini-body-text: var(--ctp-text, #4c4f69) !important;      /* Body text -> Deep Text */
+  --gemini-composer-bg: var(--ctp-surface0, #ccd0da) !important;/* Composer background -> Surface0 */
+  --gemini-row-hover: rgba(76, 79, 105, 0.08) !important;
+  --studio-surface: var(--ctp-base, #eff1f5) !important;
+  --gemini-surface: var(--ctp-surface0, #ccd0da) !important;
+  --gemini-switch-track: var(--ctp-mantle, #e6e9ef) !important;
+  --gemini-switch-slider: var(--ctp-surface0, #ccd0da) !important;
+}
+
+/* Gemini-app user message bubble light mode override */
+body.ctp-latte-mode [data-testid="lifted-context-menu-trigger"] > .bg-card,
+body.ctp-latte-mode [data-testid="lifted-context-menu-trigger"] [data-quotable="true"] {
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.ctp-latte-mode [data-testid="lifted-context-menu-trigger"] .whitespace-pre-wrap {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Gemini-app prompt box composer light mode styling and paper-like contrast */
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] > .rounded-2xl.bg-card-border > .bg-card:not([data-mention-menu]) {
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Combat high-contrast white text glare inside composer editable combobox */
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] [role="combobox"][contenteditable],
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] [role="combobox"][contenteditable] * {
+  color: var(--ctp-text, #4c4f69) !important;
+  caret-color: var(--catppuccin-accent, #fe640b) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] [role="combobox"][contenteditable] ~ * {
+  color: var(--ctp-overlay0, #9ca0b0) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] [data-beautiful-mention],
+:root:root body.ctp-latte-mode [data-testid="agent-input-box"] [data-mention] {
+  color: var(--catppuccin-accent, #fe640b) !important;
+  background-color: rgba(254, 100, 11, 0.12) !important;
+}
+
+/* Gemini-app code blocks & headers light mode adaptation */
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) div:has(> .min-h-7):has(.code-block),
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) div.relative.rounded-xl:has(> .min-h-7),
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) div.relative.whitespace-pre-wrap:has(.code-block) {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+}
+
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) .min-h-7:has(+ .p-3),
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) .min-h-7:has(+ .p-3) > .font-sans {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+body.ctp-latte-mode :is([data-testid="planner-response-text"], [role="article"][aria-label="Agent response"]) .min-h-7:has(+ .p-3) button {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Sidebar Chat/Work mode tabs slider light background */
+body.ctp-latte-mode .app-tabs,
+body.ctp-latte-mode [data-testid="sidebar-toggle"] ~ div .app-tabs {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+}
+
+/* 7.4 Latte Light Mode sidebar active item and row hover remodeling */
+body.ctp-latte-mode {
+  --gemini-row-selected: var(--ctp-surface0, #ccd0da) !important;
+  --gemini-row-hover: rgba(76, 79, 105, 0.08) !important;
+}
+
+/* Selected row background inverted from pitch black to soft Surface0 */
+body.ctp-latte-mode [data-testid="conversation-row-sidebar"][data-selected="true"],
+body.ctp-latte-mode [role="navigation"] [data-selected="true"],
+body.ctp-latte-mode .app-tabs-slider {
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Ensure high-contrast dark text and SVG icons on active sidebar items */
+body.ctp-latte-mode [data-testid="conversation-row-sidebar"][data-selected="true"] :is(span, p, svg, button) {
+  color: var(--ctp-text, #4c4f69) !important;
+  fill: currentColor !important;
+}
+
+/* Subtle brightness lift on active item hover */
+body.ctp-latte-mode [data-testid="conversation-row-sidebar"]:hover:not([data-selected="true"]) {
+  background-color: rgba(76, 79, 105, 0.06) !important;
+}
+
+/* ==========================================================================
+   8. Latte Light Mode Ecosystem Contrast & Glare Elimination
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   8.1 Window Dividers, Pane Splitters & Resize Sashes
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode :is(
+  [data-panel-resize-handle-id],
+  [data-resize-handle],
+  .sash,
+  .sash-vertical,
+  div[class*="resize-handle"],
+  div[role="separator"],
+  .border-r,
+  [data-separator="true"]
+) {
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+  border-color: var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode :is([data-panel-resize-handle-id], .sash):hover,
+:root:root body.ctp-latte-mode :is([data-panel-resize-handle-id], .sash):active {
+  background-color: var(--catppuccin-accent, #fe640b) !important;
+  box-shadow: 0 0 6px var(--catppuccin-accent-glow, rgba(254, 100, 11, 0.25)) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.2 Sidebar Navigation & Workspace Folders (Desktop collapsible headers)
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode [role="navigation"] {
+  --color-sidebar: var(--ctp-crust, #dce0e8) !important;
+  --sidebar: var(--ctp-crust, #dce0e8) !important;
+  --sidebar-background: var(--ctp-crust, #dce0e8) !important;
+  --sidebar-muted: var(--ctp-surface0, #ccd0da) !important;
+  --sidebar-secondary: var(--ctp-surface1, #bcc0cc) !important;
+  background-color: var(--ctp-crust, #dce0e8) !important;
+  background: var(--ctp-crust, #dce0e8) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  .bg-sidebar,
+  div[class*="bg-sidebar"],
+  button[class*="bg-sidebar"],
+  .group\/header,
+  div[class*="group/header"],
+  .group\/headerbtn,
+  button[class*="group/headerbtn"],
+  [class*="group/header"],
+  [data-testid*="workspace"],
+  [data-testid*="project"],
+  [data-testid*="folder"],
+  .sidebar-section-header,
+  div[class*="section-header"]
+) {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  .group\/headerbtn,
+  button[class*="group/headerbtn"]
+) span.truncate {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  .group\/headerbtn,
+  button[class*="group/headerbtn"]
+) div[class*="gap-0.5"]::after {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] svg {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+  fill: currentColor !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.3 Sidebar Action Buttons (New Chat, History, Skills, Schedules, Pets, Display Options)
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"],
+  [data-testid="history-button"],
+  [data-testid="automations-button"],
+  #gemini-skills-button,
+  #gemini-scheduled-tasks-button,
+  #gemini-new-project-button,
+  #gemini-display-options-button,
+  [data-bettergravity-button],
+  #gemini-scroll-nav > *,
+  .gemini-nav-item
+) {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"],
+  [data-testid="history-button"],
+  [data-testid="automations-button"],
+  #gemini-skills-button,
+  #gemini-scheduled-tasks-button,
+  #gemini-new-project-button,
+  #gemini-display-options-button,
+  [data-bettergravity-button],
+  #gemini-scroll-nav > *,
+  .gemini-nav-item
+) span {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"],
+  [data-testid="history-button"],
+  [data-testid="automations-button"],
+  #gemini-skills-button,
+  #gemini-scheduled-tasks-button,
+  #gemini-new-project-button,
+  #gemini-display-options-button,
+  [data-bettergravity-button],
+  #gemini-scroll-nav > *,
+  .gemini-nav-item
+) svg {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+  fill: currentColor !important;
+}
+
+/* Active navigation items (Overrides gemini-app dark states) */
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"].bg-sidebar-secondary,
+  [data-testid="history-button"].bg-sidebar-secondary,
+  [data-testid="automations-button"].bg-sidebar-secondary,
+  #gemini-skills-button.bg-sidebar-secondary,
+  #gemini-scheduled-tasks-button.bg-sidebar-secondary,
+  [data-bettergravity-button][aria-pressed="true"],
+  [data-bettergravity-button][aria-selected="true"],
+  [data-bettergravity-button][data-active="true"],
+  [data-bettergravity-button][data-selected="true"],
+  [data-bettergravity-button][data-bettergravity-active="true"],
+  [data-bettergravity-button].bg-sidebar-secondary,
+  #gemini-scroll-nav > *[aria-pressed="true"],
+  #gemini-scroll-nav > *[aria-selected="true"],
+  #gemini-scroll-nav > *[data-active="true"],
+  #gemini-scroll-nav > *[data-selected="true"],
+  #gemini-scroll-nav > *[data-bettergravity-active="true"],
+  #gemini-scroll-nav > *.bg-sidebar-secondary,
+  div.flex-col > a.bg-sidebar-secondary
+) {
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+  background: var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"].bg-sidebar-secondary,
+  [data-testid="history-button"].bg-sidebar-secondary,
+  [data-testid="automations-button"].bg-sidebar-secondary,
+  #gemini-skills-button.bg-sidebar-secondary,
+  #gemini-scheduled-tasks-button.bg-sidebar-secondary,
+  [data-bettergravity-button][aria-pressed="true"],
+  [data-bettergravity-button][aria-selected="true"],
+  [data-bettergravity-button][data-active="true"],
+  [data-bettergravity-button][data-selected="true"],
+  [data-bettergravity-button][data-bettergravity-active="true"],
+  [data-bettergravity-button].bg-sidebar-secondary,
+  #gemini-scroll-nav > *[aria-pressed="true"],
+  #gemini-scroll-nav > *[aria-selected="true"],
+  #gemini-scroll-nav > *[data-active="true"],
+  #gemini-scroll-nav > *[data-selected="true"],
+  #gemini-scroll-nav > *[data-bettergravity-active="true"],
+  #gemini-scroll-nav > *.bg-sidebar-secondary
+) :is(span, svg) {
+  color: var(--ctp-text, #4c4f69) !important;
+  fill: currentColor !important;
+}
+
+/* Navigation item hover state */
+:root:root body.ctp-latte-mode [role="navigation"] :is(
+  [data-testid="new-conversation-button"],
+  [data-testid="history-button"],
+  [data-testid="automations-button"],
+  #gemini-skills-button,
+  #gemini-scheduled-tasks-button,
+  #gemini-new-project-button,
+  #gemini-display-options-button,
+  [data-bettergravity-button],
+  #gemini-scroll-nav > *,
+  .gemini-nav-item
+):hover:not(.bg-sidebar-secondary):not([aria-pressed="true"]):not([data-selected="true"]) {
+  background-color: rgba(76, 79, 105, 0.08) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* New conversation button inactive light pill state */
+:root:root body.ctp-latte-mode [role="navigation"] [data-testid="new-conversation-button"]:not(.bg-sidebar-secondary) {
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Popover menus (Display options, conversation context menus) */
+:root:root body.ctp-latte-mode :is(
+  [role="menu"],
+  [role="menu"][data-gemini-conversation-menu],
+  div[role="menu"],
+  [data-radix-popper-content-wrapper] [role="menu"],
+  .menu-content
+) {
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root:root body.ctp-latte-mode [role="menu"] :is([role="menuitem"], button) {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [role="menu"] :is([role="menuitem"], button):hover {
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+  color: var(--catppuccin-accent, #fe640b) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.4 In-Chat File Changes Header & Diff Review Pill
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode :is(
+  .files-changed-header,
+  [data-testid*="file-change"],
+  [data-testid*="file-diff"],
+  [data-testid="trajectory-file-changes"],
+  .file-changes-badge,
+  div:has(> [data-testid*="file-diff"])
+) {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+:root:root body.ctp-latte-mode .files-changed-header:hover,
+:root:root body.ctp-latte-mode .files-changed-header:active {
+  background: var(--ctp-surface0, #ccd0da) !important;
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode .files-changed-header > .overflow-hidden :is(span, div) {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-file-card-subtitle {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode .files-changed-header .review-button {
+  background-color: var(--catppuccin-accent, #1e66f5) !important;
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.5 Voyager Branch Tree HUD (Maintains authentic dark semi-transparent space HUD across all flavors)
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode .bg-timeline-rail {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+:root:root body.ctp-latte-mode .bg-timeline-rail:hover {
+  background: rgba(24, 24, 37, 0.96) !important;
+  border-color: var(--ctp-surface1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+  transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1) 0.28s,
+              padding 200ms ease 0.28s,
+              background-color 180ms ease 0.28s,
+              border-color 180ms ease 0.28s,
+              box-shadow 200ms ease 0.28s,
+              backdrop-filter 180ms ease 0.28s,
+              -webkit-backdrop-filter 180ms ease 0.28s;
+}
+
+:root:root body.ctp-latte-mode .bg-timeline-rail.bg-expanded {
+  background: rgba(24, 24, 37, 0.96) !important;
+  border-color: var(--ctp-surface1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+  transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1) 0s,
+              padding 200ms ease 0s,
+              background-color 180ms ease 0s,
+              border-color 180ms ease 0s,
+              box-shadow 200ms ease 0s;
+}
+
+:root:root body.ctp-latte-mode :is(.bg-timeline-card, .bg-turn-details) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:root:root body.ctp-latte-mode .bg-timeline-step-label {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+:root:root body.ctp-latte-mode .bg-timeline-snippet {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.6 Conversation History Full-Screen View Light Mode Adaptation
+   -------------------------------------------------------------------------- */
+/* Conversation history viewport canvas and sticky search header */
+:root:root body.ctp-latte-mode .h-full.w-full.flex.flex-col.items-center.overflow-y-auto:has([data-testid="history-search-input"]),
+:root:root body.ctp-latte-mode .sticky.top-0:has([data-testid="history-search-input"]) {
+  background: var(--ctp-base, #eff1f5) !important;
+  background-color: var(--ctp-base, #eff1f5) !important;
+}
+
+/* 64px rounded search bar pill */
+:root:root body.ctp-latte-mode .sticky.top-0:has([data-testid="history-search-input"]) > div.flex.items-center.gap-2 {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="history-search-input"] {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="history-search-input"]::placeholder {
+  color: var(--ctp-overlay0, #9ca0b0) !important;
+}
+
+:root:root body.ctp-latte-mode .sticky.top-0:has([data-testid="history-search-input"]) div.relative > svg {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode .sticky.top-0:has([data-testid="history-search-input"]) > div:first-child:not(.flex)::after {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode .willow-search-clear-btn {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode .willow-search-clear-btn:hover {
+  background: rgba(76, 79, 105, 0.08) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Eliminate stark Desktop header blocks for seamless background blending */
+:root:root body.ctp-latte-mode .h-full:has([data-testid="history-search-input"]) div:has(> svg + span.truncate),
+:root:root body.ctp-latte-mode .h-full:has([data-testid="history-search-input"]) div.bg-muted,
+:root:root body.ctp-latte-mode .h-full:has([data-testid="history-search-input"]) div.bg-secondary {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* History conversation rows & hover states */
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] {
+  background: transparent !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"]:hover {
+  background: rgba(76, 79, 105, 0.08) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] span.truncate.text-sm {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] span.text-xs.text-muted-foreground,
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] span.text-xs.text-foreground.opacity-60,
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] [data-screenshot-volatile="true"] {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode [data-testid="conversation-row-history"] button[data-testid="conversation-kebab"] {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.7 Skills Library, Pets Page & Scheduled Tasks Light Mode Adaptation
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode :is(
+  .spark-customise-page--skills,
+  .bettergravity-pets-page,
+  .bettergravity-pet-library,
+  #gemini-skills-view,
+  #gemini-scheduled-tasks-view,
+  [data-testid="skills-view"],
+  [data-pet-page-host]
+) {
+  background: var(--ctp-base, #eff1f5) !important;
+  background-color: var(--ctp-base, #eff1f5) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  .spark-customise-header h1,
+  .spark-customise-header p,
+  .bettergravity-pet-library__header h1,
+  .bettergravity-pet-library__header p,
+  .bettergravity-pet-library__state-name,
+  .spark-customise-page--skills h1,
+  .spark-customise-page--skills h2,
+  .spark-customise-page--skills p,
+  .spark-skills-library > h2,
+  .spark-recommended-skills > h2
+) {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+/* Skills search bar pill */
+:root:root body.ctp-latte-mode .spark-skills-search-box {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skills-search-box:hover,
+:root:root body.ctp-latte-mode .spark-skills-search-box:focus-within {
+  background: var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skills-search-box input {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skills-search-box input::placeholder {
+  color: var(--ctp-overlay0, #9ca0b0) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skills-search-box .search-icon {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+/* Skills library container and row items */
+:root:root body.ctp-latte-mode .spark-skills-library__list {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-row {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border-bottom: 1px solid var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-row:hover,
+:root:root body.ctp-latte-mode .spark-skill-row:focus-within,
+:root:root body.ctp-latte-mode .spark-skill-row.has-menu-open {
+  background: var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-card {
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-card__title {
+  color: var(--ctp-text, #4c4f69) !important;
+  font-weight: 500 !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-card__description {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skill-badge {
+  background: var(--ctp-surface1, #bcc0cc) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-page-action:not(.spark-page-action--primary) {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-page-action:not(.spark-page-action--primary):hover {
+  background: var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode .spark-skills-empty {
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode :is(.spark-skills-empty h2, .spark-skills-empty p) {
+  color: var(--ctp-subtext0, #6c6f85) !important;
+}
+
+/* Pet library buttons and stage containers */
+:root:root body.ctp-latte-mode :is(
+  .bettergravity-pet-library__button,
+  .bettergravity-pet-library__row,
+  .bettergravity-pet-library__stage,
+  .bettergravity-pet-library__progress,
+  [data-testid="skill-card"]
+) {
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode .bettergravity-pet-library__button:hover:not(:disabled) {
+  background: var(--ctp-surface0, #ccd0da) !important;
+  background-color: var(--ctp-surface0, #ccd0da) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8.8 TitleBar Toolbar, Window Controls & Floating Dictation Pill
+   -------------------------------------------------------------------------- */
+:root:root body.ctp-latte-mode :is(
+  header,
+  [data-testid="window-titlebar"],
+  .titlebar,
+  header:has([data-testid="sidebar-toggle"])
+) {
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border-bottom: 1px solid var(--ctp-surface0, #ccd0da) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  .titlebar-actions,
+  [data-testid="window-controls"],
+  .window-controls,
+  header > div:last-child,
+  header button:not([data-bettergravity-button="Accent"])
+) {
+  background-color: transparent !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  [data-testid="title-menu-bar"] button,
+  header svg,
+  [data-testid="window-controls"] svg
+) {
+  color: var(--ctp-text, #4c4f69) !important;
+  fill: currentColor !important;
+}
+
+/* Bottom-right floating voice dictation pill */
+:root:root body.ctp-latte-mode :is(
+  div.fixed:has(button svg path[d*="mic" i]),
+  div.fixed:has(button svg),
+  [data-testid*="voice"],
+  [data-testid*="dictat"],
+  [data-testid*="speech"]
+) {
+  background-color: var(--ctp-mantle, #e6e9ef) !important;
+  background: var(--ctp-mantle, #e6e9ef) !important;
+  border: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  div.fixed:has(button svg path[d*="mic" i]),
+  div.fixed:has(button svg)
+) :is(button, svg, span) {
+  color: var(--ctp-text, #4c4f69) !important;
+  fill: currentColor !important;
+}
+
+/* Sidebar footer dock area (Settings, Profile triggers) */
+:root:root body.ctp-latte-mode :is(
+  [data-testid="sidebar-footer"],
+  [data-testid*="settings"],
+  [data-testid*="profile"],
+  [role="navigation"] footer,
+  [role="navigation"] > div:last-child
+) {
+  background-color: var(--ctp-crust, #dce0e8) !important;
+  background: var(--ctp-crust, #dce0e8) !important;
+  border-top: 1px solid var(--ctp-surface0, #ccd0da) !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  [data-testid="sidebar-footer"] button,
+  [data-testid*="settings-button"],
+  [data-testid*="profile-button"]
+) {
+  background-color: transparent !important;
+  color: var(--ctp-text, #4c4f69) !important;
+}
+
+:root:root body.ctp-latte-mode :is(
+  [data-testid="sidebar-footer"],
+  [data-testid*="settings"]
+) svg {
+  color: var(--ctp-text, #4c4f69) !important;
+  fill: currentColor !important;
+}
+
+
+
+

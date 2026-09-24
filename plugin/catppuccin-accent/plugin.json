@@ -1,0 +1,11 @@
+{
+  "name": "Catppuccin Accent",
+  "description": "Context-aware dynamic accent color switcher for Catppuccin themes. Only appears when Catppuccin is active.",
+  "version": "2.0.1",
+  "author": "RedPanda-Craft",
+  "main": "index.js",
+  "styles": [
+    "styles/accent.css"
+  ],
+  "source": "https://github.com/YashjitPal/BetterGravity"
+}
